@@ -1,0 +1,80 @@
+{
+    "parameters": {
+        "poolId": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of Azure Batch pool which runs the job"
+            }
+        },
+        "jobId": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of Azure Batch job"
+            }
+        },
+        "BatchPoolVMSize": {
+            "type": "string",
+            "defaultValue": "Standard_D4as_v4",
+            "metadata": {
+                "description": "The VM SKU to run the Batch job"
+            }
+        },  
+        "MaxTasksPerNode": {
+            "type": "string",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The # of slots (ie. tasks) to run on each VM"
+            }
+        },
+        "weather": {
+            "type": "string",
+            "defaultValue": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+            "metadata": {
+                "description": "Enter the filename (plus extension) of the weather file"
+            }
+        }
+    },
+    "job": {
+        "type": "Microsoft.Batch/batchAccounts/jobs",
+        "apiVersion": "2016-12-01",
+        "properties": {
+            "id": "[parameters('jobId')]",
+            "constraints": {
+                "maxTaskRetryCount": 1
+            },
+            "poolInfo": {
+                "poolId": "[parameters('poolId')]"
+            },
+            "taskFactory": {
+                "type": "taskPerFile",
+                "source": {
+                    "fileGroup": "epdemo-taskfactory-input"
+                },
+                "repeatTask": {
+                    "commandLine": "cmd /c %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\\\energyplus.exe -w %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\\\weatherdata\\\\[parameters('weather')]  {fileName}",
+                    "resourceFiles": [
+                        {
+                            "blobSource": "{url}",
+                            "filePath": "{fileName}"
+                        }
+                    ],
+                    "outputFiles": [
+                        {
+                            "filePattern": "[!\\.idf]",
+                            "destination": {
+                                "autoStorage": {
+                                    "path": "{fileNameWithoutExtension}_[parameters('jobId')]",
+                                    "fileGroup": "energyplus-output"
+                                }
+                            },
+                            "uploadOptions": {
+                                "uploadCondition": "TaskCompletion"
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAllTasksComplete": "terminatejob"
+        }
+    }
+}
