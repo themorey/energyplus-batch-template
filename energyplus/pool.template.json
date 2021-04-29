@@ -1,0 +1,57 @@
+{
+    "parameters": {
+        "poolId": {
+            "type": "string",
+            "defaultValue": "energyplus-pool",
+            "metadata": {
+                "description": "Id of the pool"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "The size of the virtual machines that run the application"
+            },
+            "defaultValue": "Standard_D4as_v4",
+            "allowedValues": [
+                "STANDARD_D2as_v4",
+                "STANDARD_D4as_v4",
+                "STANDARD_D8as_v4",
+                "STANDARD_D16as_v4",
+                "Standard_D32as_v4",
+                "Standard_D64as_v4"
+            ]
+        },
+        "maxVmCount": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The max number of VMs in the Azure Batch pool"
+            }
+        },
+    },
+    "variables": {
+        "osType": {
+            "imageReference": {
+                "publisher": "microsoftwindowsserver",
+                "offer": "windowsserver",
+                "sku": "2019-datacenter",
+                "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.windows amd64"
+        }
+    },
+    "pool": {
+        "id": "[parameters('poolId')]",
+        "displayName": "Ffmpeg pool running: [parameters('poolId')]",
+        "vmSize": "[parameters('vmSize')]",
+        "virtualMachineConfiguration": "[variables('osType')]",
+        "enableInterNodeCommunication": false,
+        "enableAutoScale": true,
+        "autoScaleFormula": "startingNumberOfVMs = 0; maxNumberofVMs = [parameters('maxVmCount')]; pendingTaskSamplePercent = \\$PendingTasks.GetSamplePercent(180 * TimeInterval_Second); pendingTaskSamples = pendingTaskSamplePercent < 70 ? startingNumberOfVMs : avg(\\$PendingTasks.GetSample(180 * TimeInterval_Second)); \\$TargetDedicatedNodes=min(maxNumberofVMs, pendingTaskSamples); \\$NodeDeallocationOption = taskcompletion;",
+        "autoScaleEvaluationInterval": "PT5M",
+        "taskSchedulingPolicy": {
+            "nodeFillType": "Pack"
+        },
+    }
+}
