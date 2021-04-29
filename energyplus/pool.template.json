@@ -22,13 +22,13 @@
                 "Standard_D64as_v4"
             ]
         },
-        "numNodes": {
+        "numberNodes": {
             "type": "int",
             "defaultValue": 1,
             "metadata": {
                 "description": "The max number of VMs in the Azure Batch pool"
             }
-        },
+        }
     },
     "variables": {
         "osType": {
@@ -48,10 +48,10 @@
         "virtualMachineConfiguration": "[variables('osType')]",
         "enableInterNodeCommunication": false,
         "enableAutoScale": true,
-        "autoScaleFormula": "startingNumberOfVMs = 0; maxNumberofVMs = [parameters('numNodes')]; pendingTaskSamplePercent = \\$PendingTasks.GetSamplePercent(180 * TimeInterval_Second); pendingTaskSamples = pendingTaskSamplePercent < 70 ? startingNumberOfVMs : avg(\\$PendingTasks.GetSample(180 * TimeInterval_Second)); \\$TargetDedicatedNodes=min(maxNumberofVMs, pendingTaskSamples); \\$NodeDeallocationOption = taskcompletion;",
+        "autoScaleFormula": "startingNumberOfVMs = 0; maxNumberofVMs = [parameters('numberNodes')]; pendingTaskSamplePercent = \\$PendingTasks.GetSamplePercent(180 * TimeInterval_Second); pendingTaskSamples = pendingTaskSamplePercent < 70 ? startingNumberOfVMs : avg(\\$PendingTasks.GetSample(180 * TimeInterval_Second)); \\$TargetDedicatedNodes=min(maxNumberofVMs, pendingTaskSamples); \\$NodeDeallocationOption = taskcompletion;",
         "autoScaleEvaluationInterval": "PT5M",
         "taskSchedulingPolicy": {
             "nodeFillType": "Pack"
-        },
+        }
     }
 }
