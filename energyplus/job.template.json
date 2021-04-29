@@ -1,4 +1,4 @@
-    {
+{
     "parameters": {
         "poolId": {
             "type": "string",
@@ -48,11 +48,37 @@
                     ],
                     "outputFiles": [
                         {
-                            "filePattern": "[!***.idf]",
-                            "destination": {
-                                "autoStorage": {
-                                    "path": "{fileNameWithoutExtension}_[parameters('jobId')]",
-                                    "fileGroup": "energyplus-outputs"
+                            {
+                                "filePattern": "../stdout.txt",
+                                "destination": {
+                                    "autoStorage": {
+                                        "fileGroup": "energyplus-outputs",
+                                        "path": "[parameters('jobId')]/logs/energyplus.log"
+                                    }
+                                },
+                                "uploadOptions": {
+                                    "uploadCondition": "taskCompletion"
+                                }
+                            },
+                            {
+                                "filePattern": "../stderr.txt",
+                                "destination": {
+                                    "autoStorage": {
+                                        "fileGroup": "energyplus-outputs",
+                                        "path": "[parameters('jobId')]/logs/energyplus_error.log"
+                                    }
+                                },
+                                "uploadOptions": {
+                                    "uploadCondition": "taskCompletion"
+                                }
+                            },
+                            {
+                                "filePattern": "[!***.idf]",
+                                "destination": {
+                                    "autoStorage": {
+                                        "path": "[parameters('jobId')]/{fileNameWithoutExtension}/",
+                                        "fileGroup": "energyplus-outputs"
+                                    }
                                 }
                             },
                             "uploadOptions": {
