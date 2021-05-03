@@ -1,7 +1,8 @@
 # EnergyPlus on Azure Batch
 This repo will implement the [EnergyPlus](https://energyplus.net/) program on Azure Batch.  It has been configured to use Azure Batch Explorer (ABE) desktop app to submit a job to Azure Batch using an autopool.  From a high level, the following steps are performed:
 
-![ABE Job Launch](./images/ABE-job-popup.png)
+[ ![ABE Job launch](./images/ABE-job-popup.png)](./images/ABE-job-popup.png#lightbox)
+
   1. Run the _job.template.json_ file from ABE Gallery
   2. Set the parameters in the popup   
     a. Add input files to the FileGroup named fgrp-energyplus-inputs
