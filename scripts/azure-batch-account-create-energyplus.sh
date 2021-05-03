@@ -19,7 +19,7 @@ batch_rg=${org}-${app}-batch-rg
 sub_id=$(az account show --query id --output tsv) # if executing this from subscription, else hard code sub_idd
 vnet_2_octets="10.25"
 batch_name=${org}${app}batch
-storage_account_name=${app}sa
+storage_account_name=${org}${app}sa
 
 
 # Set az to the correct subscription
