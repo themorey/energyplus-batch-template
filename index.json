@@ -1,7 +1,0 @@
-[
-    {
-        "id": "energyplus",
-        "name": "Run EngeryPlus in Azure Batch",
-        "description": "This job will process some # of input files (*.idf) in a Batch FileGroup and place outputs in another Batch FileGroup"
-    }
-]
