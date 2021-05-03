@@ -1,36 +1,61 @@
 # EnergyPlus on Azure Batch
 This repo will implement the [EnergyPlus](https://energyplus.net/) program on Azure Batch.  It has been configured to use Azure Batch Explorer (ABE) desktop app to submit a job to Azure Batch using an autopool.  From a high level, the following steps are performed:
 
-[ ![ABE Job launch](./images/ABE-job-popup.png)](./images/ABE-job-popup.png#lightbox)
 
-  1. Run the _job.template.json_ file from ABE Gallery
-  2. Set the parameters in the popup   
-    a) Add input files to the FileGroup named fgrp-energyplus-inputs  
-    b) enter a Pool name  
-    c) enter a Job name  
-    d) enter # of VMs to run in the Pool  
-    e) enter the VM size (ie. Standard_D4as_v4)  
-    f) enter the tasks per VM (ie. 1 task per Standard_D4as_v4; 2 tasks for Standard_D8as_v4)  
-    g) enter the filename (plus extension) of the Weather file to use  
-    
-  3. Click _Run_ and monitor the Jobs and Pools in ABE  
-  5. Output is uploaded fgrp-energyplus-outputs when the tasks are complete
+  1. Add input files to the FileGroup named _fgrp-energyplus-inputs_  
+  2. Run the _job.template.json_ file from ABE Gallery  
+  3. Azure Batch autopool is created and jobs are run 
+  5. The job output & std*.txt are uploaded to _fgrp-energyplus-outputs_ when the tasks are complete  
   6. the autopool is deleted  
 
-## Azure Tools/Services Used
+## Azure Services/Tools Used
   - [Azure Batch](https://docs.microsoft.com/en-us/azure/batch/)
+  - [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/general/)
+  - [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/)
   - [Azure Batch Explorer](https://azure.github.io/BatchExplorer/)
   - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
+  - [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
 
 
 ## Pre-Reqs
-  1. Install [ABE](https://azure.github.io/BatchExplorer/) and [CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) if not already installed
+  1. Install [ABE](https://azure.github.io/BatchExplorer/) and [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (if not already installed)
+      - alternatively use Azure Cloud Shell instead of installing Azure CLI on your local computer  
   2. Install Azure Batch Extension for Azure CLI:  _az extension add -n azure-batch-cli-extensions_  
-  3. Create Azure Batch account if not already created (_scripts/azure-batch-account-create-energyplus.sh_)  
-      > \## _To run the script to create an Azure Batch account with EnergyPlus App:_  
+  4. Create Azure Batch account if not already created (_scripts/azure-batch-account-create-energyplus.sh_)  
+      > \## _Run the script to create an Azure Batch account with EnergyPlus App:_  
       > cd scripts/  
       > vim azure-batch-account-create-energyplus.sh  ##NOTE: update variables as needed
       > chmod +x azure-batch-account-create-energyplus.sh  
       > ./azure-batch-account-create-energyplus.sh  
 
-## 
+
+## Instructions
+  1. Clone this repository to your local computer (or cloud shell)  
+  2. Create FileGroup named _fgrp-energyplus-input_ in ABE "Data"  
+
+      [ABE File Group Create](./images/ABE-data-fgrp.png)  
+      a.  Click "Data" on left vertical menu  
+      b.  Click dropdown for "STORAGE CONTAINERS" and select "File Groups"  
+      c.  Click "+" to add a new File Group  
+      d.  Select "Empty file group" and in the popup enter the name "energyplus-inputs"  
+      
+  3.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
+    
+      [ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
+      
+  4.  Click "Gallery" on the ABE left vertical menu  
+  5.  Select the "Pick a local template" button on the top right  
+  6.  In the popup window, navigate to the cloned git repo template folder and select the _energyplus-job-autopool-template.json_ file  
+  
+      [ABE Job popup](./images/ABE-job-popup.png)  
+      
+  7.  Input Job parameters:  
+ 
+       a.  enter a Pool name (ie. azdemo-pool)  
+       b.  enter a Job name  (ie. azdemo-job-1)  
+       c.  enter # of VMs to run in the Pool (ie. 10)  
+       d.  enter the VM size (ie. Standard_D4as_v4)  
+       e.  enter the tasks per VM (ie. 1 task per Standard_D4as_v4; 2 tasks for Standard_D8as_v4)  
+       f.  enter the filename (plus extension) of the Weather file to use  
+       
+  8.  Click _Run_ and monitor the Jobs and Pools in ABE
