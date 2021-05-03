@@ -103,4 +103,4 @@ az batch account login \
 
 # Create the EnergyPlus application for Azure Batch
 # SOURCE: https://github.com/NREL/EnergyPlus/releases/download/v9.4.0/EnergyPlus-9.4.0-998c4b761e-Windows-x86_64.zip
-az batch application package create --application-name ${app} -g ${batch_rg} -n ${batch_name} --package-file ${local_app_path} --version-name ${app_version}
+az batch application package create --application-name ${app} -g ${batch_rg} -n ${batch_name} --package-file ${local_app_path} --version-name ${app-version}
