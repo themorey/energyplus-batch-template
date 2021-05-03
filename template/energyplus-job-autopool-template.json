@@ -94,7 +94,7 @@
                     "fileGroup": "inputs"
                 },
                 "repeatTask": {
-                    "commandLine": "cmd /c %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\energyplus.exe -w %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\weatherdata\\[parameters('weather')]  {fileName}",
+                    "commandLine": "cmd /c cd %AZ_BATCH_APP_PACKAGE_energyplus#[parameters('energyPlusPkgVer')]%\\EnergyPlus-[parameters('energyPlusPkgVer')]-*  && energyplus.exe -w weatherdata\\[parameters('weather')]  %AZ_BATCH_TASK_WORKING_DIR%\\{fileName}",
                     "resourceFiles": [
                         {
                             "blobSource": "{url}",
@@ -103,7 +103,7 @@
                     ],
                     "outputFiles": [
                         {
-                            "filePattern": "eplus*",
+                            "filePattern": "%AZ_BATCH_APP_PACKAGE_energyplus#[parameters('energyPlusPkgVer')]%\\EnergyPlus-[parameters('energyPlusPkgVer')]-*\\eplus*",
                             "destination": {
                                 "autoStorage": {
                                     "path": "[parameters('jobId')]/{fileNameWithoutExtension}/outputs",
