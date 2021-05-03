@@ -1,0 +1,147 @@
+{
+    "parameters": {
+        "poolId": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Azure Batch pool to run the job(s)"
+            }
+        },
+        "jobId": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of Azure Batch job"
+            }
+        },
+        "numberNodes": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The max number of VMs in the Azure Batch pool"
+            }
+        },
+        "taskSlotsPerNode": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The max number of tasks to run on each node (ie. Standard_D4as_v4 = 1; Standard_8as_v4 = 2; etc"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "The size of the virtual machines that run the application"
+            },
+            "defaultValue": "Standard_D4as_v4"
+        },
+        "energyPlusPkgVer": {
+            "type": "string",
+            "metadata": {
+                "description": "The EnergyPlus version to run"
+            },
+            "defaultValue": "9.4.0"
+        },
+        "weather": {
+            "type": "string",
+            "defaultValue": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
+            "metadata": {
+                "description": "Enter the filename (plus extension) of the weather file"
+            }
+        }
+    },
+    "job": {
+        "type": "Microsoft.Batch/batchAccounts/jobs",
+        "apiVersion": "2016-12-01",
+        "properties": {
+            "id": "[parameters('jobId')]",
+            "constraints": {
+                "maxTaskRetryCount": 3
+            },
+            "poolInfo": {
+                "autoPoolSpecification": {
+                    "autoPoolIdPrefix": "[parameters('poolId')]",
+                    "keepAlive": "false",
+                    "poolLifetimeOption": "job",
+                    "pool": {
+                        "vmSize": "[parameters('vmSize')]",
+                        "virtualMachineConfiguration": {
+                          "imageReference": {
+                            "offer": "windowsserver",
+                            "publisher": "microsoftwindowsserver",
+                            "sku": "2019-datacenter",
+                            "version": "latest"
+                          },    
+                          "nodeAgentSkuId": "batch.node.windows amd64"
+                        },
+                        "enableInterNodeCommunication": false,
+                        "enableAutoScale": false,
+                        "targetDedicatedNodes": "[parameters('numberNodes')]",
+                        "taskSlotsPerNode": "[parameters('taskSlotsPerNode')]",
+                        "taskSchedulingPolicy": {
+                          "nodeFillType": "Pack"
+                        },
+                        "applicationPackageReferences": [
+                            {
+                                "applicationId": "energyplus",
+                                "version": "[parameters('energyPlusPkgVer')]"
+                            }
+                        ]
+                    }
+                }
+            },
+            "taskFactory": {
+                "type": "taskPerFile",
+                "source": {
+                    "fileGroup": "inputs"
+                },
+                "repeatTask": {
+                    "commandLine": "cmd /c %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\energyplus.exe -w %AZ_BATCH_APP_PACKAGE_energyplus#9.4.0%\\EnergyPlus-9.4.0-998c4b761e-Windows-x86_64\\weatherdata\\[parameters('weather')]  {fileName}",
+                    "resourceFiles": [
+                        {
+                            "blobSource": "{url}",
+                            "filePath": "{fileName}"
+                        }
+                    ],
+                    "outputFiles": [
+                        {
+                            "filePattern": "eplus*",
+                            "destination": {
+                                "autoStorage": {
+                                    "path": "[parameters('jobId')]/{fileNameWithoutExtension}/outputs",
+                                    "fileGroup": "energyplus-outputs"
+                                }
+                            },
+                            "uploadOptions": {
+                                "uploadCondition": "TaskCompletion"
+                            }
+                        },
+                                                {
+                            "filePattern": "../stdout.txt",
+                            "destination": {
+                                "autoStorage": {
+                                    "fileGroup": "energyplus-outputs",
+                                    "path": "[parameters('jobId')]/{fileNameWithoutExtension}/logs/energyplus.log"
+                                }
+                            },
+                            "uploadOptions": {
+                                "uploadCondition": "taskCompletion"
+                            }
+                        },
+                        {
+                            "filePattern": "../stderr.txt",
+                            "destination": {
+                                "autoStorage": {
+                                    "fileGroup": "energyplus-outputs",
+                                    "path": "[parameters('jobId')]/{fileNameWithoutExtension}/logs/energyplus_error.log"
+                                }
+                            },
+                            "uploadOptions": {
+                                "uploadCondition": "taskCompletion"
+                            }
+                        }
+                    ]
+                }
+            },
+            "onAllTasksComplete": "terminatejob"
+        }
+    }
+}
