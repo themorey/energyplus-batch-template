@@ -3,7 +3,7 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
 
 
   1. Add input files to the FileGroup named _fgrp-energyplus-inputs_  
-  2. Run the _job.template.json_ file from ABE Gallery  
+  2. Run the _energyplus-job-autopool-template.json_ file from ABE Gallery  
   3. Azure Batch autopool is created and jobs are run 
   5. The job output & std*.txt are uploaded to _fgrp-energyplus-outputs_ when the tasks are complete  
   6. the autopool is deleted  
