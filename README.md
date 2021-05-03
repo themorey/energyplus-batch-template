@@ -22,7 +22,7 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
 
 
 ## Pre-Reqs
-  1. Install [ABE](https://azure.github.io/BatchExplorer/)a and [CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) if not already installed
+  1. Install [ABE](https://azure.github.io/BatchExplorer/) and [CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) if not already installed
   2. Install Azure Batch Extension for Azure CLI:  _az extension add -n azure-batch-cli-extensions_  
   3. Create Azure Batch account if not already created (_scripts/azure-batch-account-create-energyplus.sh_)  
   4. 
