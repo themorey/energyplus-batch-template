@@ -40,22 +40,6 @@ az storage account create \
   --encryption-services blob
 
 
-# Find storage key
-storage_key=$( az storage account keys list --account-name ${storage_account_name} --resource-group ${batch_rg} --query [0].value  --output tsv )
-echo ${storage_key}
-
-
-# Create storage containers for use with Batch account
-declare -a containers
-containers=( "fgrp-energyplus-inputs" "fgrp-energyplus-outputs" )
-for blob in "${containers[@]}"; do
-    az storage container create \
-    --name ${blob} \
-    --account-name ${storage_account_name} \
-    --account-key ${storage_key}
-done
-
-
 #
 # Setup network
 #
