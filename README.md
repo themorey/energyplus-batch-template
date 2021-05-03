@@ -33,7 +33,8 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
   1. Clone this repository to your local computer (or cloud shell)  
   2. Create FileGroup named _fgrp-energyplus-input_ in ABE "Data"  
 
-      [ABE File Group Create](./images/ABE-data-fgrp.png)  
+      ![ABE File Group Create](./images/ABE-data-fgrp.png)  
+      
       a.  Click "Data" on left vertical menu  
       b.  Click dropdown for "STORAGE CONTAINERS" and select "File Groups"  
       c.  Click "+" to add a new File Group  
@@ -41,15 +42,17 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
       
   3.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
     
-      [ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
+      ![ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
       
   4.  Click "Gallery" on the ABE left vertical menu  
   5.  Select the "Pick a local template" button on the top right  
   6.  In the popup window, navigate to the cloned git repo template folder and select the _energyplus-job-autopool-template.json_ file  
   
-      [ABE Job popup](./images/ABE-job-popup.png)  
+      ![ABE Template](./images/ABE-gallery-template.png)
       
   7.  Input Job parameters:  
+
+       ![ABE Job popup](./images/ABE-job-popup.png) 
  
        a.  enter a Pool name (ie. azdemo-pool)  
        b.  enter a Job name  (ie. azdemo-job-1)  
