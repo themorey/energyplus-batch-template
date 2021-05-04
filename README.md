@@ -1,5 +1,8 @@
-# EnergyPlus on Azure Batch
-This repo will implement the [EnergyPlus](https://energyplus.net/) program on Azure Batch.  It has been configured to use Azure Batch Explorer (ABE) desktop app to submit a job to Azure Batch using an autopool.  From a high level, the following steps are performed:
+# EnergyPlus™ on Azure Batch
+This repo will implement the [EnergyPlus™](https://energyplus.net/) program on Azure Batch.  EnergyPlus™ is an open-source program provided by Department of Energy that provides whole building energy simulation program for engineers, architects, and researchers to model both energy consumption—for heating, cooling, ventilation, lighting and plug and process loads—and water use in buildings. 
+
+
+EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app to submit a job to Azure Batch using an autopool.  From a high level, the following steps are performed:
 
 
   1. Add input files to the FileGroup named _fgrp-energyplus-inputs_  
