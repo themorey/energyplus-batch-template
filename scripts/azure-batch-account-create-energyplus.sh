@@ -19,7 +19,16 @@ batch_rg=${org}-${app}-batch-rg
 sub_id=$(az account show --query id --output tsv) # if executing this from subscription, else hard code sub_idd
 vnet_2_octets="10.25"
 batch_name=${org}${app}batch
+
+
+# Check for storage account unique name (must be GLOBALLY unique)
 storage_account_name=${org}${app}sa
+i=0
+while grep -q "false" sa-name; do
+    storage_account_name=${org}${app}${i}sa
+    az storage account check-name --name ${storage_account_name} > sa-name
+    ((i++))
+done
 
 
 # Set az to the correct subscription
