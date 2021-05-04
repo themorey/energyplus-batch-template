@@ -51,7 +51,7 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
       a.  Click "Data" on left vertical menu  
       b.  Click dropdown for "STORAGE CONTAINERS" and select "File Groups"  
       c.  Click "+" to add a new File Group  
-      d.  Select "Empty file group" and in the popup enter the name "energyplus-inputs"  
+      d.  Select "Empty file group" and in the popup enter the name "energyplus-inputs"  (do NOT add _fgrp-_ here it will be auto added)
       
   2.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
     
