@@ -18,13 +18,14 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
   - [Azure Batch Explorer](https://azure.github.io/BatchExplorer/)
   - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
   - [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
+  - [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps)
 
 
 ## Pre-Reqs
   1. Install [ABE](https://azure.github.io/BatchExplorer/) and [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (if not already installed)
       - alternatively use Azure Cloud Shell instead of installing Azure CLI on your local computer  
   2. Install Azure Batch Extension for Azure CLI:  `az extension add -n azure-batch-cli-extensions`  
-  3. Install `Git` to clone this repo
+  3. Install `Git` to clone this repo (_**NOTE:** on Windows use WSL for steps 3-5...alternatively Azure Cloud Shell_)
       > mkdir ~/energyplus  
       > git clone https://github.com/themorey/energyplus-batch-template.git ~/energyplus
   
