@@ -67,4 +67,5 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
        e.  enter the tasks per VM (ie. 1 task per Standard_D4as_v4; 2 tasks for Standard_D8as_v4)  
        f.  enter the filename (plus extension) of the Weather file to use  
        
-  7.  Click _Run_ and monitor the Jobs and Pools in ABE
+  7.  Click _Run_ and monitor the Jobs and Pools in ABE  
+  8.  View output and stderr/stdout files in _fgrp-energyplus-outputs_
