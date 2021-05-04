@@ -28,7 +28,10 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
       > mkdir ~/energyplus  
       > git clone https://github.com/themorey/energyplus-batch-template.git ~/energyplus
   
-  4. Create Azure Batch account if not already created (use included script in _scripts/azure-batch-account-create-energyplus.sh_)  
+  4. Download EnergyPlus™ to the machine to run the Batch config script  
+      > wget https://github.com/NREL/EnergyPlus/releases/download/v9.4.0/EnergyPlus-9.4.0-998c4b761e-Windows-x86_64.zip
+  
+  5. Create Azure Batch account if not already created (use included script in _scripts/azure-batch-account-create-energyplus.sh_)  
  
       > \## _Run the script to create an Azure Batch account with EnergyPlus App:_  
       > cd ~/energyplus/scripts/  
