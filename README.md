@@ -53,13 +53,13 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
       c.  Click "+" to add a new File Group  
       d.  Select "Empty file group" and in the popup enter the name "energyplus-inputs"  (do **NOT** add _fgrp-_ here it will be auto added)
       
-  2.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
+  2.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/_fgrp-energyplus-inputs_ window  
     
       ![ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
       
-  3.  Click "Gallery" on the ABE left vertical menu  
-  4.  Select the "Pick a local template" button on the top right  
-  5.  In the popup window, navigate to the cloned git repo template folder and select the _energyplus-job-autopool-template.json_ file  
+  3.  Click "_Gallery_" on the ABE left vertical menu  
+  4.  Select the "_Pick a local template_" button on the top right  
+  5.  In the popup window, navigate to the cloned git repo template folder and select the `energyplus-job-autopool-template.json` file  
   
       ![ABE Template](./images/ABE-gallery-template.png)
       
@@ -67,12 +67,12 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
 
        ![ABE Job popup](./images/ABE-job-popup.png) 
  
-       a.  enter a Pool name (ie. azdemo-pool)  
-       b.  enter a Job name  (ie. azdemo-job-1)  
-       c.  enter # of VMs to run in the Pool (ie. 10)  
-       d.  enter the VM size (ie. Standard_D4as_v4)  
-       e.  enter the tasks per VM (ie. 1 task per Standard_D4as_v4; 2 tasks for Standard_D8as_v4)  
+       a.  enter a Pool name (ie. `azdemo-pool`)  
+       b.  enter a Job name  (ie. `azdemo-job-1`)  
+       c.  enter # of VMs to run in the Pool (ie. `10`)  
+       d.  enter the VM size (ie. `Standard_D4as_v4`)  
+       e.  enter the tasks per VM (ie. `1` task per Standard_D4as_v4; `2` tasks for Standard_D8as_v4)  
        f.  enter the filename (plus extension) of the Weather file to use  
        
-  7.  Click _Run_ and monitor the Jobs and Pools in ABE  
+  7.  Click `Run` and monitor the Jobs and Pools in ABE  
   8.  View output and stderr/stdout files in _fgrp-energyplus-outputs_
