@@ -20,18 +20,21 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
 ## Pre-Reqs
   1. Install [ABE](https://azure.github.io/BatchExplorer/) and [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (if not already installed)
       - alternatively use Azure Cloud Shell instead of installing Azure CLI on your local computer  
-  2. Install Azure Batch Extension for Azure CLI:  _az extension add -n azure-batch-cli-extensions_  
-  4. Create Azure Batch account if not already created (_scripts/azure-batch-account-create-energyplus.sh_)  
+  2. Install Azure Batch Extension for Azure CLI:  `az extension add -n azure-batch-cli-extensions`  
+  3. Install `Git` to clone this repo
+      > mkdir ~/energyplus
+      > git clone https://github.com/themorey/energyplus-batch-template.git ~/energyplus
+  
+  4. Create Azure Batch account if not already created (use included script in _scripts/azure-batch-account-create-energyplus.sh_)  
       > \## _Run the script to create an Azure Batch account with EnergyPlus App:_  
-      > cd scripts/  
+      > cd ~/energyplus/scripts/  
       > vim azure-batch-account-create-energyplus.sh  ##NOTE: update variables as needed
       > chmod +x azure-batch-account-create-energyplus.sh  
       > ./azure-batch-account-create-energyplus.sh  
 
 
 ## Instructions
-  1. Clone this repository to your local computer (or cloud shell)  
-  2. Create FileGroup named _fgrp-energyplus-input_ in ABE "Data"  
+  1. Create FileGroup named _fgrp-energyplus-input_ in ABE "Data"  
 
       ![ABE File Group Create](./images/ABE-data-fgrp.png)  
       
@@ -40,17 +43,17 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
       c.  Click "+" to add a new File Group  
       d.  Select "Empty file group" and in the popup enter the name "energyplus-inputs"  
       
-  3.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
+  2.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/fgrp-energyplus-inputs window  
     
       ![ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
       
-  4.  Click "Gallery" on the ABE left vertical menu  
-  5.  Select the "Pick a local template" button on the top right  
-  6.  In the popup window, navigate to the cloned git repo template folder and select the _energyplus-job-autopool-template.json_ file  
+  3.  Click "Gallery" on the ABE left vertical menu  
+  4.  Select the "Pick a local template" button on the top right  
+  5.  In the popup window, navigate to the cloned git repo template folder and select the _energyplus-job-autopool-template.json_ file  
   
       ![ABE Template](./images/ABE-gallery-template.png)
       
-  7.  Input Job parameters:  
+  6.  Input Job parameters:  
 
        ![ABE Job popup](./images/ABE-job-popup.png) 
  
@@ -61,4 +64,4 @@ This repo will implement the [EnergyPlus](https://energyplus.net/) program on Az
        e.  enter the tasks per VM (ie. 1 task per Standard_D4as_v4; 2 tasks for Standard_D8as_v4)  
        f.  enter the filename (plus extension) of the Weather file to use  
        
-  8.  Click _Run_ and monitor the Jobs and Pools in ABE
+  7.  Click _Run_ and monitor the Jobs and Pools in ABE
