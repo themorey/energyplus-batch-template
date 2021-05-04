@@ -26,7 +26,7 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
       - alternatively use Azure Cloud Shell instead of installing Azure CLI on your local computer  
   2. Install Azure Batch Extension for Azure CLI:  `az extension add -n azure-batch-cli-extensions`  
   3. Install `Git` to clone this repo (_**NOTE:** on Windows use WSL for steps 3-5...alternatively Azure Cloud Shell_)
-      > mkdir /energyplus  
+      > sudo mkdir /energyplus && sudo chown $USER /energyplus
       > git clone https://github.com/themorey/energyplus-batch-template.git /energyplus
   
   4. Download EnergyPlus™ to the machine to run the Batch config script  
@@ -37,7 +37,7 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
   6. Create Azure Batch account if not already created (use included script in _scripts/azure-batch-account-create-energyplus.sh_)  
  
       > \## _Run the script to create an Azure Batch account with EnergyPlus App:_  
-      > cd ~/energyplus/scripts/  
+      > cd /energyplus/scripts/  
       > vim azure-batch-account-create-energyplus.sh  ##NOTE: update variables as needed  
       > chmod +x azure-batch-account-create-energyplus.sh  
       > ./azure-batch-account-create-energyplus.sh  
