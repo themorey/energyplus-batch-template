@@ -91,7 +91,7 @@
             "taskFactory": {
                 "type": "taskPerFile",
                 "source": {
-                    "fileGroup": "inputs"
+                    "fileGroup": "energyplus-input"
                 },
                 "repeatTask": {
                     "commandLine": "cmd /c cd %AZ_BATCH_APP_PACKAGE_energyplus#[parameters('energyPlusPkgVer')]%\\EnergyPlus-[parameters('energyPlusPkgVer')]-*  && energyplus.exe -w weatherdata\\[parameters('weather')]  %AZ_BATCH_TASK_WORKING_DIR%\\{fileName}",
