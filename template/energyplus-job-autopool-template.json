@@ -21,9 +21,9 @@
         },
         "taskSlotsPerNode": {
             "type": "int",
-            "defaultValue": 1,
+            "defaultValue": 8,
             "metadata": {
-                "description": "The max number of tasks to run on each node (ie. Standard_D4as_v4 = 1; Standard_8as_v4 = 2; etc"
+                "description": "The max number of tasks to run on each node (ie. Standard_D16ds_v4 = 8; Standard_32ds_v4 = 16; etc"
             }
         },
         "vmSize": {
@@ -31,7 +31,7 @@
             "metadata": {
                 "description": "The size of the virtual machines that run the application"
             },
-            "defaultValue": "Standard_D4as_v4"
+            "defaultValue": "Standard_D16ds_v4"
         },
         "energyPlusPkgVer": {
             "type": "string",
