@@ -55,7 +55,13 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
       
   2.  Add input files to _fgrp-energyplus-inputs_ by selecting your files and dragging them to the ABE/data/_fgrp-energyplus-inputs_ window  
     
-      ![ABE Add Input Files](./images/ABE-fgrp-add-files.png)  
+      ![ABE Add Input Files](./images/ABE-fgrp-add-files-dir.png)  
+      
+      a.  Select "Data" on the ABE left vertical menu  
+      b.  Single click to select "_fgrp-energyplus-inputs_"  
+      c.  In the "_fgrp-energyplus-inputs_" section, click the "_+_" to add input files to the file group  
+      d.  Drag your input files to this window to have them added to your file group  
+      e.  Add a "Prefix" that matches the Azure Batch Job ID you will use (ie. _azdemo-job-11_).  Also, be sure to check the "Flatten" check box  
       
   3.  Click "_Gallery_" on the ABE left vertical menu  
   4.  Select the "_Pick a local template_" button on the top right  
