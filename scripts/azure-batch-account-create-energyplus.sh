@@ -23,6 +23,7 @@ batch_name=${org}${app}batch
 
 # Check for storage account unique name (must be GLOBALLY unique)
 storage_account_name=${org}${app}sa
+az storage account check-name --name ${storage_account_name} > sa-name
 i=0
 while grep -q "false" sa-name; do
     storage_account_name=${org}${app}${i}sa
