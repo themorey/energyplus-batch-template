@@ -76,7 +76,7 @@
                         "enableInterNodeCommunication": false,
                         "enableAutoScale": false,
                         "targetDedicatedNodes": "[parameters('numberNodes')]",
-                        "taskSlotsPerNode": "[parameters('taskSlotsPerNode')]",
+                        "maxTasksPerNode": "[parameters('taskSlotsPerNode')]",
                         "taskSchedulingPolicy": {
                           "nodeFillType": "Pack"
                         },
