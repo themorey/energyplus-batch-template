@@ -4,12 +4,13 @@
             "type": "string",
             "metadata": {
                 "description": "The name of the Azure Batch pool to run the job(s)"
-            }
+            },
+            "defaultValue": "EP-autopool"
         },
         "jobId": {
             "type": "string",
             "metadata": {
-                "description": "The name of Azure Batch job"
+                "description": "The name of Azure Batch job (must match folder name used for Input files)"
             }
         },
         "numberNodes": {
