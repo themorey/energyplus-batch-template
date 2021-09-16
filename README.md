@@ -44,7 +44,7 @@ EnergyPlus™ has been configured to use Azure Batch Explorer (ABE) desktop app 
 
 
 ## Instructions
-  1. Create FileGroup named _fgrp-energyplus-input_ in ABE "Data"  
+  1. In Azure Batch Explorer create a FileGroup named _fgrp-energyplus-input_  
 
       ![ABE File Group Create](./images/ABE-data-fgrp.png)  
       
